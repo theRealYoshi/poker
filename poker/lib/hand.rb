@@ -1,13 +1,17 @@
+require 'byebug'
 require_relative 'deck.rb'
+require_relative 'card.rb'
 
 class Hand
-  attr_accessor :cards
+  attr_accessor :cards, :value
   #initialize with a 5 card hand
   def initialize(deck)
+    @value = 0
     @cards = []
     5.times do
       @cards << deck.deal_cards
     end
+
   end
 
   def drop_cards(d_cards)
@@ -24,16 +28,26 @@ class Hand
     end
   end
 
-  # calculating poker logic
-  # record hand.cards values and suites in an array
-  # sort the array based on values
-  # initial a score variable to 0
-  # iterate through possible cases - pairs, threeofkind, straight,
-  # full house, flush, royal flush - assign a number based on rank to a variable
-  # return variable number if it's greater than 0, else return the highest card with highest suite
-  #
-  #
-  # logic which hands beat what
-  #
+
+  def eval_hand(hand)
+    suits = hand.map{ |h| h.suit}
+    values = hand.map{ |h| Card.card_values[h.value].to_i}
+    case
+      debugger
+    when suits.all?{ |suit| Card.suits.any? {|card_suit| suit == card_suit}} && ((values.max - values.min) == 4) && values.uniq.count == values.count
+      @value = Card.poker_hands[:straight_flush]
+    when values.uniq == 2 && values.uniq.any? {|value| values.count(value) == 4 } #four of a kind
+      @value = Card.poker_hands[:four_kind]
+    # # when hand (# 3 and 2)
+    # # when hand #same suit
+    # # when hand #cascading order
+    # # when hand #3 of a kind
+    # # when hand #two pairs
+    # # when hand #one pair
+    else
+      hand_value = 0
+    end
+    # hand_value
+  end
 
 end

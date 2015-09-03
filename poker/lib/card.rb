@@ -17,10 +17,22 @@ class Card
     :eight => "8",
     :nine  => "9",
     :ten   => "10",
-    :jack  => "J",
-    :queen => "Q",
-    :king  => "K",
-    :ace   => "A"
+    :jack  => "11",
+    :queen => "12",
+    :king  => "13",
+    :ace   => "14"
+  }
+
+  POKER_HANDS_VALUES = {
+    :straight_flush => 1000,
+    :four_kind      => 700,
+    :full_house     => 500,
+    :flush          => 400,
+    :straight       => 300,
+    :three_kind     => 200,
+    :two_pair       => 150,
+    :one_pair       => 100,
+    :no_hand        => 0,
   }
 
   # Returns an array of all suits.
@@ -31,6 +43,14 @@ class Card
   # Returns an array of all values.
   def self.values
     VALUE_STRINGS.keys
+  end
+
+  def self.card_values
+    VALUE_STRINGS
+  end
+
+  def self.poker_hands
+    POKER_HANDS_VALUES
   end
 
   def self.all_cards
