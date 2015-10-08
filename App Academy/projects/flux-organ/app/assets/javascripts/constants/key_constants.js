@@ -1,0 +1,4 @@
+var KeyConstants = {
+  CREATE_NOTE: "CREATE_NOTE",
+  REMOVE_NOTE: "REMOVE_NOTE"
+};
